@@ -1,6 +1,6 @@
 {
-  "input_file": "/minimax-dialogue/users/xigua/xingye/chat/v1.3.8_data.jsonl",
-  "output_file": "/minimax-dialogue/users/xigua/xingye/chat/",
+  "input_file": "/minimax-dialogue/users/data_science/data/xingye_log/xigua_data/2024_00_19/",
+  "output_file": "./output/2024_09_23",
   "sample_size": 1000,
   "user_sample_size": 1000,
   "random_sample": true,

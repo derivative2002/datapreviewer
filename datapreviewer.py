@@ -181,5 +181,6 @@ class DataProcessor:
 
 if __name__ == "__main__":
     processor = DataProcessor('config.json')
-    processor.sample_by_user_id()
-    processor.split_train_test()
+#    processor.sample_by_user_id()
+#    processor.split_train_test()
+    processor.sample_jsonl()
