@@ -1,8 +1,7 @@
 import json
-import random
 import os
+import random
 from collections import defaultdict
-from datetime import datetime
 
 
 class DataProcessor:
@@ -128,59 +127,19 @@ class DataProcessor:
         print(f"总行数: {total_count}, 采样行数: {len(sampled_data)}")
         print(f"采样用户数: {len(set(entry['user_id'] for entry in sampled_data))}")
 
-    def split_train_test(self):
+    def process_data(self):
         """
-        将文件拆分成训练集和测试集。
+        根据配置文件中的操作类型执行相应的数据处理操作
         """
-        input_file = self.config['input_file']
-        output_dir = self.config['output_file']
-        test_size = self.config['sample_size']
-        random_sample = self.config['random_sample']
-        seed = self.config.get('seed')
+        operation = self.config.get('operation', 'sample_jsonl')
 
-        # 获取模型版本号和当前日期
-        model_version = os.path.basename(input_file).split('_data.jsonl')[0]
-        current_date = datetime.now().strftime("%Y%m%d")
-
-        # 创建输出文件名
-        train_file = os.path.join(output_dir, f"{model_version}_{current_date}_train.jsonl")
-        test_file = os.path.join(output_dir, f"{model_version}_{current_date}_test.jsonl")
-
-        # 确保输出目录存在
-        os.makedirs(output_dir, exist_ok=True)
-
-        if seed is not None:
-            random.seed(seed)
-
-        # 读取所有数据
-        with open(input_file, 'r') as f:
-            all_data = f.readlines()
-
-        total_count = len(all_data)
-
-        if random_sample:
-            # 随机打乱数据
-            random.shuffle(all_data)
-
-        # 拆分数据
-        test_data = all_data[:test_size]
-        train_data = all_data[test_size:]
-
-        # 写入测试集
-        with open(test_file, 'w') as f:
-            f.writelines(test_data)
-
-        # 写入训练集
-        with open(train_file, 'w') as f:
-            f.writelines(train_data)
-
-        print(f"拆分完成。")
-        print(f"总行数: {total_count}")
-        print(f"测试集: {test_file}, 行数: {len(test_data)}")
-        print(f"训练集: {train_file}, 行数: {len(train_data)}")
+        if operation == 'sample_jsonl':
+            self.sample_jsonl()
+        elif operation == 'sample_by_user_id':
+            self.sample_by_user_id()
+        else:
+            print(f"未知的操作类型: {operation}")
 
 if __name__ == "__main__":
     processor = DataProcessor('config.json')
-#    processor.sample_by_user_id()
-#    processor.split_train_test()
-    processor.sample_jsonl()
+    processor.process_data()
