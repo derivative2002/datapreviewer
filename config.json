@@ -1,9 +1,9 @@
 {
-  "input_file": "/minimax-dialogue/raw_data/online_data/hailuo_query_tagging/kaiping_huiliu_for_1st_class_tag_tidal_format/1st_class_tag_samples_whole0806/闲聊/kaiping_huiliu.predictions.merged.json",
-  "output_file": "./output/",
-  "sample_size": 100,
+  "input_file": "/minimax-dialogue/users/xigua/xingye/chat/v1.3.8_data.jsonl",
+  "output_file": "./output/2024_09_23/",
+  "sample_size": 1000,
   "user_sample_size": 1000,
-  "random_sample": false,
+  "random_sample": true,
   "indent": 2,
   "seed": 6
 }
