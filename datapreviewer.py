@@ -140,7 +140,7 @@ class DataProcessor:
 
         # 获取模型版本号和当前日期
         model_version = os.path.basename(input_file).split('_data.jsonl')[0]
-        current_date = datetime.now().strftime("%Y_%m_%d")
+        current_date = datetime.now().strftime("%Y%m%d")
 
         # 创建输出文件名
         train_file = os.path.join(output_dir, f"{model_version}_{current_date}_train.jsonl")
